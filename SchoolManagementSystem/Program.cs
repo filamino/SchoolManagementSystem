@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using SchoolManagementSystem.Models;
+
 namespace SchoolManagementSystem
 {
     public class Program
@@ -8,7 +12,7 @@ namespace SchoolManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<SmsdbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
