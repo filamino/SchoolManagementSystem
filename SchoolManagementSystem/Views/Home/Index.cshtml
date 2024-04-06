@@ -6,3 +6,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Student std in ViewBag.StudentList)
+        {
+            <tr>
+               
+                <td>@std.LastName</td>
+                <td>@std.FirstName</td>
+            </tr>
+        }
+    </tbody>
+</table>

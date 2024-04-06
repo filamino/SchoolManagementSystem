@@ -7,14 +7,18 @@ namespace SchoolManagementSystem.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SmsdbContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, SmsdbContext smsdbContext)
         {
             _logger = logger;
+            _dbContext = smsdbContext;
         }
 
         public IActionResult Index()
         {
+            var students = _dbContext.Students.ToList();
+            ViewBag.StudentList = students;
             return View();
         }
 
