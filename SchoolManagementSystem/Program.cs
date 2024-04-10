@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolManagementSystem.Models;
+using SchoolManagementSystem.Data;
 
 namespace SchoolManagementSystem
 {

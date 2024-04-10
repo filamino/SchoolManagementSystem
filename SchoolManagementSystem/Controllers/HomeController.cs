@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Models;
+using SchoolManagementSystem.Data;
 using System.Diagnostics;
 
 namespace SchoolManagementSystem.Controllers
@@ -8,6 +9,8 @@ namespace SchoolManagementSystem.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SmsdbContext _dbContext;
+
+      
 
         public HomeController(ILogger<HomeController> logger, SmsdbContext smsdbContext)
         {

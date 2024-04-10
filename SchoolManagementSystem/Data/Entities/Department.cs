@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data.Entities;
 
 public partial class Department
 {
@@ -17,9 +17,5 @@ public partial class Department
 
     public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();
 
-    public virtual ICollection<Student> Students { get; set; } = new List<Student>();
-
     public virtual ICollection<Subject> Subjects { get; set; } = new List<Subject>();
-
-    public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

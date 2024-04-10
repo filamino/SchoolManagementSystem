@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data.Entities;
 
 public partial class Teacher
 {
@@ -23,17 +23,7 @@ public partial class Teacher
 
     public string? Experience { get; set; }
 
-    public int AddressId { get; set; }
+    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
 
-    public int SectionId { get; set; }
-
-    public int GenderId { get; set; }
-
-    public int DepartmentId { get; set; }
-
-    public virtual Address Address { get; set; } = null!;
-
-    public virtual Department Department { get; set; } = null!;
-
-    public virtual Gender Gender { get; set; } = null!;
+    public virtual Gender? Gender { get; set; }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data.Entities;
 
 public partial class Exam
 {

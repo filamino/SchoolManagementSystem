@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data.Entities;
 
 public partial class Profile
 {
@@ -13,11 +13,9 @@ public partial class Profile
 
     public string? Role { get; set; }
 
-    public int AddressId { get; set; }
+    public int UserId { get; set; }
 
-    public int? UserId { get; set; }
+    public virtual Gender? Gender { get; set; }
 
-    public virtual Address Address { get; set; } = null!;
-
-    public virtual Register? User { get; set; }
+    public virtual Register User { get; set; } = null!;
 }
