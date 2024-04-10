@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagementSystem.Data.Entities;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data;
 
 public partial class SmsdbContext : DbContext
 {
@@ -46,6 +47,8 @@ public partial class SmsdbContext : DbContext
     public virtual DbSet<TypeOfHoliday> TypeOfHolidays { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
@@ -59,6 +62,16 @@ public partial class SmsdbContext : DbContext
             entity.Property(e => e.Country).HasMaxLength(50);
             entity.Property(e => e.Province).HasMaxLength(50);
             entity.Property(e => e.ZipCode).HasMaxLength(50);
+
+            entity.HasOne(d => d.Student).WithMany(p => p.Addresses)
+                .HasForeignKey(d => d.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Address_Student");
+
+            entity.HasOne(d => d.Teacher).WithMany(p => p.Addresses)
+                .HasForeignKey(d => d.TeacherId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Address_Teacher");
         });
 
         modelBuilder.Entity<Class>(entity =>
@@ -109,7 +122,23 @@ public partial class SmsdbContext : DbContext
         {
             entity.ToTable("Gender");
 
+            entity.Property(e => e.GenderId).ValueGeneratedOnAdd();
             entity.Property(e => e.GenderType).HasMaxLength(50);
+
+            entity.HasOne(d => d.GenderNavigation).WithOne(p => p.Gender)
+                .HasForeignKey<Gender>(d => d.GenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Gender_Profile");
+
+            entity.HasOne(d => d.Gender1).WithOne(p => p.Gender)
+                .HasForeignKey<Gender>(d => d.GenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Gender_Teacher");
+
+            entity.HasOne(d => d.Student).WithMany(p => p.Genders)
+                .HasForeignKey(d => d.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Gender_Student");
         });
 
         modelBuilder.Entity<Holiday>(entity =>
@@ -141,13 +170,9 @@ public partial class SmsdbContext : DbContext
             entity.Property(e => e.FullName).HasMaxLength(50);
             entity.Property(e => e.Role).HasMaxLength(50);
 
-            entity.HasOne(d => d.Address).WithMany(p => p.Profiles)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Profile_Address");
-
             entity.HasOne(d => d.User).WithMany(p => p.Profiles)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Profile_Register");
         });
 
@@ -181,21 +206,6 @@ public partial class SmsdbContext : DbContext
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.Image).HasColumnType("image");
             entity.Property(e => e.LastName).HasMaxLength(50);
-
-            entity.HasOne(d => d.Address).WithMany(p => p.Students)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Student_Address");
-
-            entity.HasOne(d => d.Department).WithMany(p => p.Students)
-                .HasForeignKey(d => d.DepartmentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Student_Department");
-
-            entity.HasOne(d => d.Gender).WithMany(p => p.Students)
-                .HasForeignKey(d => d.GenderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Student_Gender");
         });
 
         modelBuilder.Entity<Subject>(entity =>
@@ -218,21 +228,6 @@ public partial class SmsdbContext : DbContext
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.Qualification).HasMaxLength(50);
-
-            entity.HasOne(d => d.Address).WithMany(p => p.Teachers)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Teacher_Address");
-
-            entity.HasOne(d => d.Department).WithMany(p => p.Teachers)
-                .HasForeignKey(d => d.DepartmentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Teacher_Department");
-
-            entity.HasOne(d => d.Gender).WithMany(p => p.Teachers)
-                .HasForeignKey(d => d.GenderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Teacher_Gender");
         });
 
         modelBuilder.Entity<TypeOfHoliday>(entity =>

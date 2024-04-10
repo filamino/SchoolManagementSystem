@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data.Entities;
 
 public partial class Student
 {
@@ -25,15 +25,7 @@ public partial class Student
 
     public byte[]? Image { get; set; }
 
-    public int GenderId { get; set; }
+    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
 
-    public int AddressId { get; set; }
-
-    public int DepartmentId { get; set; }
-
-    public virtual Address Address { get; set; } = null!;
-
-    public virtual Department Department { get; set; } = null!;
-
-    public virtual Gender Gender { get; set; } = null!;
+    public virtual ICollection<Gender> Genders { get; set; } = new List<Gender>();
 }

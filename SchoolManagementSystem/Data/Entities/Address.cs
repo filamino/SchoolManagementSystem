@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagementSystem.Models;
+namespace SchoolManagementSystem.Data.Entities;
 
 public partial class Address
 {
@@ -17,9 +17,11 @@ public partial class Address
 
     public string? Country { get; set; }
 
-    public virtual ICollection<Profile> Profiles { get; set; } = new List<Profile>();
+    public int StudentId { get; set; }
 
-    public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+    public int TeacherId { get; set; }
 
-    public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+    public virtual Student Student { get; set; } = null!;
+
+    public virtual Teacher Teacher { get; set; } = null!;
 }
