@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Data.Entities;
+using SchoolManagementSystem.Models;
 
 namespace SchoolManagementSystem.Data;
 
@@ -243,4 +244,6 @@ public partial class SmsdbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+public DbSet<SchoolManagementSystem.Models.StudentViewModel> StudentViewModel { get; set; } = default!;
 }
