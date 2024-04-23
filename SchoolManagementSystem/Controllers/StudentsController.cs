@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,8 +22,27 @@ namespace SchoolManagementSystem.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+
+        [Authorize]
+        public async Task< IActionResult> Index()
         {
+            //var student = _context.Students.Select(student =>
+            //new
+            //{
+            //    StudentName = student.FirstName,
+            //    StudentLastName = student.LastName,
+            //    student.DateOfBirth,
+            //    student.AdmissionNumber,
+            //    GenderType = student.Genders.Select(gender => gender.GenderType).FirstOrDefault(),
+            //    Location = student.Addresses.Select(add => add.Address1)
+            //}).ToList();
+            ////var stud= _context.Students.Select(student=> new { studentName = student.FirstName, student.LastName, student.PhoneNumber }).ToList();
+
+            ////ViewBag.studentlist = student;
+            //return View( student);
+
+
+            //var student = _context.Students.ToListAsync();
             return View(await _context.Students.ToListAsync());
         }
 
@@ -51,58 +71,76 @@ namespace SchoolManagementSystem.Controllers
         }
 
         // POST: Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( StudentViewModel studentViewModel)
+        public async Task<IActionResult> Create([Bind("StudentId,AdmissionNumber,FirstName,LastName,DateOfBirth,PhoneNumber,JoinedDate,Email,About")] Student student)
         {
             if (ModelState.IsValid)
             {
-                var student = new Student
-                {
-                    FirstName = studentViewModel.FirstName,
-                    LastName = studentViewModel.LastName,
-                    AdmissionNumber = studentViewModel.AdmissionNumber,
-                    DateOfBirth = studentViewModel.DateOfBirth,
-                    JoinedDate = studentViewModel.JoinedDate,
-                    Email=studentViewModel.Email,
-                    PhoneNumber=studentViewModel.PhoneNumber,
-                    About=studentViewModel.About
-                };
-                _context.Students.Add(student);
-                _context.SaveChanges();
-
-                Address address = new Address
-                {
-                    Address1 = studentViewModel.Address1,
-                    City = studentViewModel.City,
-                    Province = studentViewModel.Province,
-                    ZipCode = studentViewModel.ZipCode,
-                    Country = studentViewModel.Country,
-                    StudentId = student.StudentId
-                };
-
-                // Add Address             
-               // _context.Addresses.Add(address);
-               // _context.SaveChanges();
-                // Assign StudentId to Gender
-                Gender gender = new Gender
-                {
-                    GenderType = studentViewModel.GenderType,
-                    StudentId = student.StudentId
-
-                };
-              
-                _context.Genders.Add(gender);
-                _context.SaveChanges();
-
-
+                _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction ("Index");
+            return View(student);
         }
+
+
+
+
+
+        // POST: Students/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(StudentViewModel studentViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var student = new Student
+        //        {
+        //            FirstName = studentViewModel.FirstName,
+        //            LastName = studentViewModel.LastName,
+        //            AdmissionNumber = studentViewModel.AdmissionNumber,
+        //            DateOfBirth = studentViewModel.DateOfBirth,
+        //            JoinedDate = studentViewModel.JoinedDate,
+        //            Email = studentViewModel.Email,
+        //            PhoneNumber = studentViewModel.PhoneNumber,
+        //            About = studentViewModel.About
+        //        };
+        //        _context.Students.Add(student);
+        //        _context.SaveChanges();
+
+        //        Address address = new Address
+        //        {
+        //            Address1 = studentViewModel.Address1,
+        //            City = studentViewModel.City,
+        //            Province = studentViewModel.Province,
+        //            ZipCode = studentViewModel.ZipCode,
+        //            Country = studentViewModel.Country,
+        //            StudentId = student.StudentId
+        //        };
+
+        //        Add Address
+        //        _context.Addresses.Add(address);
+        //        _context.SaveChanges();
+        //        Assign StudentId to Gender
+        //        Gender gender = new Gender
+        //        {
+        //            GenderType = studentViewModel.GenderType,
+        //            StudentId = student.StudentId
+
+        //        };
+
+        //        _context.Genders.Add(gender);
+        //        _context.SaveChanges();
+
+
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -192,5 +230,7 @@ namespace SchoolManagementSystem.Controllers
         {
             return _context.Students.Any(e => e.StudentId == id);
         }
+
+        
     }
 }

@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Models;
 using SchoolManagementSystem.Data;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagementSystem.Controllers
 {
@@ -18,13 +21,19 @@ namespace SchoolManagementSystem.Controllers
             _dbContext = smsdbContext;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            var students = _dbContext.Students.ToList();
-            ViewBag.StudentList = students;
+            int studentCount = _dbContext.Students.Count();
+            ViewBag.StudentCount = studentCount;
+            int teachers = _dbContext.Teachers.Count();
+            ViewBag.teachersCount= teachers;
+            int departments = _dbContext.Departments.Count();
+            ViewBag.DepartmentCount = departments;
             return View();
         }
 
+        
         public IActionResult Privacy()
         {
             return View();
@@ -34,6 +43,14 @@ namespace SchoolManagementSystem.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public int StudentCount()
+        {
+            var result = _dbContext.Students.Count();
+            ViewBag.StudentCount = result;
+            
+            return result;
         }
     }
 }

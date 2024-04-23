@@ -13,9 +13,9 @@ public partial class Gender
 
     public int TeacherId { get; set; }
 
-    public virtual Teacher Gender1 { get; set; } = null!;
+    public virtual Teacher? Gender1 { get; set; }
 
-    public virtual Profile GenderNavigation { get; set; } = null!;
+    public virtual Profile? GenderNavigation { get; set; }
 
-    public virtual Student Student { get; set; } = null!;
+    public virtual Student? Student { get; set; }
 }

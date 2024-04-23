@@ -9,5 +9,7 @@ public partial class Login
 
     public int UserId { get; set; }
 
-    public virtual Register User { get; set; } = null!;
+    public int Email { get; set; }
+
+    public virtual Register? User { get; set; } 
 }

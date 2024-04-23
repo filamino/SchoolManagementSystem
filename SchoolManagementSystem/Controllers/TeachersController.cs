@@ -61,6 +61,7 @@ namespace SchoolManagementSystem.Controllers
             {
                 _dbContext.Add(teacher);
                 await _dbContext.SaveChangesAsync();
+                TempData["AlertMessage"] = "New Record Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(teacher);
@@ -112,7 +113,8 @@ namespace SchoolManagementSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+				TempData["AlertMessage"] = "Record Updated Successfully";
+				return RedirectToAction(nameof(Index));
             }
             return View(teacher);
         }

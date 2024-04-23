@@ -1,0 +1,78 @@
+﻿<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title">
+                    <span>Main Menu</span>
+                </li>
+                <li class="submenu active">
+                    <a href="#"><i class="fas fa-chart-bar"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Admin Dashboard</a></li>
+                        <li><a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Teacher">Teacher Dashboard</a></li>
+
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class="nav-link" asp-area="" asp-controller="Student" asp-action="Index">Student List</a></li>
+                        <li><a class="nav-link" asp-area="" asp-controller="Student" asp-action="Create">Add Student</a></li>
+                        
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class="nav-link" asp-area="" asp-controller="Teachers" asp-action="Index">Teachers List</a></li>
+                        <li><a class="nav-link" asp-area="" asp-controller="Teachers" asp-action="Create">Add Teacher</a></li>
+                        
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class="nav-link" asp-area="" asp-controller="Departments" asp-action="Index">Department List</a></li>
+                        <li><a class="nav-link" asp-area="" asp-controller="Departments" asp-action="Create">Add Department</a></li>
+                     
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class="nav-link" asp-area="" asp-controller="Subject" asp-action="Index">Subject List</a></li>
+                        <li><a class="nav-link" asp-area="" asp-controller="Subject" asp-action="Create">Add Subject</a></li>
+                    </ul>
+                </li>
+                <li class="menu-title">
+                    <span>Management</span>
+                </li>
+
+                <li>
+                    <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
+               
+                </li>
+
+                <li>
+                    <a href="event.html"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
+                </li>
+                <li>
+                    <a href="time-table.html"><i class="fas fa-table"></i> <span>Time Table</span></a>
+                </li>
+
+                <li class="menu-title">
+                    <span>Admin</span>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-shield-alt"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                        <li><a href="forgot-password.html">Forgot Password</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

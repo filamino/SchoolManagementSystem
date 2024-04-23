@@ -4,45 +4,82 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Department</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="DepartmentId" />
-            <div class="form-group">
-                <label asp-for="Department1" class="control-label"></label>
-                <input asp-for="Department1" class="form-control" />
-                <span asp-validation-for="Department1" class="text-danger"></span>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Edit Department</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Index">Department</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit Department</li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="HeadOfDepartment" class="control-label"></label>
-                <input asp-for="HeadOfDepartment" class="form-control" />
-                <span asp-validation-for="HeadOfDepartment" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="form-title">
+                                        <span>Department Details</span>
+                                    </h5>
+                                </div>
+                              
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="DepartmentId" />
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="DepartmentId" class="Control-label">Department Name</label>
+                                        <input asp-for="Department1" type="text" class="form-control"/>
+                                        <span asp-validation-for="Department1" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="HeadOfDepartment" class="Control-label">Department Head</label>
+                                        <input asp-for="HeadOfDepartment" type="text" class="form-control" />
+                                        <span asp-validation-for="HeadOfDepartment" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="DepartmentStartDate" class="Control-label">Start Date</label>
+                                        <input asp-for="DepartmentStartDate" type="date" class="form-control" />
+                                        <span asp-validation-for="DepartmentStartDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="NumberOfStudent" class="Control-label">Number of Students</label>
+                                        <input asp-for="NumberOfStudent" type="text" class="form-control" />
+                                        <span asp-validation-for="NumberOfStudent" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary" value="Save">
+                                        Submit
+                                    </button>
+                                </div>
+                              
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DepartmentStartDate" class="control-label"></label>
-                <input asp-for="DepartmentStartDate" class="form-control" />
-                <span asp-validation-for="DepartmentStartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberOfStudent" class="control-label"></label>
-                <input asp-for="NumberOfStudent" class="form-control" />
-                <span asp-validation-for="NumberOfStudent" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
