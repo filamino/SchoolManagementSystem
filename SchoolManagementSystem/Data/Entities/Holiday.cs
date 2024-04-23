@@ -15,5 +15,5 @@ public partial class Holiday
 
     public int TypeOfHolidayId { get; set; }
 
-    public virtual TypeOfHoliday TypeOfHoliday { get; set; } = null!;
+    public virtual TypeOfHoliday? TypeOfHoliday { get; set; } 
 }

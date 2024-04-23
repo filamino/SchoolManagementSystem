@@ -4,7 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+@* <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -59,11 +59,93 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Experience)
         </dd>
-    </dl>
+    </dl> *@
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="TeacherId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+   
+   
+   <div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Teachers Delete</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Index">Teachers</a>
+                        </li>
+                        <li class="breadcrumb-item active">Teachers Delete</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="about-info">
+                            <h4>About Me</h4>
+                            <div class="media mt-3">
+                                <img src="~/assets/img/user.jpg" class="mr-3" alt="..." />
+                                <div class="media-body">
+                                    <ul>
+                                        <li>
+                                            <span class="title-span">Full Name : </span>
+                                            <span class="info-span">@Model.FirstName  @Model.LastName</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Qualification : </span>
+                                            <span class="info-span">@Model.Qualification</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Mobile : </span>
+                                            <span class="info-span">@Model.MobileNumber</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Date of Birth : </span>
+                                            <span class="info-span">@Model.DateOfBirth</span>
+                                        </li>
+                                        
+                                        <li>
+                                            <span class="title-span">Email : </span>
+                                            <span class="info-span">
+                                                <a href="https://preschool.com/cdn-cgi/l/email-protection"
+                                                   class="__cf_email__"
+                                                   data-cfemail="a3c7c2cad0dae3c4cec2cacf8dc0ccce">[email&#160;protected]</a>
+                                            </span>
+                                        </li>
+                                        
+                                        <li>
+                                            <span class="title-span">DOB : </span>
+                                            <span class="info-span">@Model.DateOfBirth</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <p>
+                                        <form asp-action="Delete">
+                                            <input type="hidden" asp-for="TeacherId" />
+                                            <input type="submit" value="Delete" class="btn btn-danger" /> |
+                                            <a asp-action="Index">Back to List</a>
+                                        </form>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright © 2024 SchoolManagementSystem</p>
+    </footer>
+</div> 
+    
+    
+

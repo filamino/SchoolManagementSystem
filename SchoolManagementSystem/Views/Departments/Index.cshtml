@@ -1,53 +1,86 @@
-﻿@model IEnumerable<SchoolManagementSystem.Data.Entities.Department>
+﻿@model List<SchoolManagementSystem.Data.Entities.Department>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Departments</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">Departments</li>
+                    </ul>
+                </div>
+                <div class="col-auto text-right float-right ml-auto">
+                    <a asp-action="Create" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                  
+                </div>
+            </div>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Department1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HeadOfDepartment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfStudent)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeadOfDepartment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfStudent)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
+                                    <tr>                                     
+                                        <th>Department</th>
+                                        <th>Department Head</th>
+                                        <th>Started Year</th>
+                                        <th>No of Students</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var dep in Model)
+                                    {
+                                        <tr>
+                                            <td>@dep.Department1 </td>                                    
+                                            <td>@dep.HeadOfDepartment</td>
+                                            <td>@dep.DepartmentStartDate.Value.Year</td>
+                                            <td>@dep.NumberOfStudent</td>
+                                            <td class="text-right">
+                                                <div class="actions">
+                                                    
+                                                    <a asp-action="Edit" asp-route-id="@dep.DepartmentId"
+                                                       class="btn btn-sm bg-success-light mr-2">
+                                                        <i class="fas fa-pen"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@dep.DepartmentId"
+                                                        class="btn btn-sm bg-danger-light">
+                                                        <i class="fas fa-trash"></i>                                                      
+                                                    </a>
+                                                     
+                                                </div>
+                                            </td>
+           
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                Copyright © 2024 SchoolManagementSystem
+            </footer>
+        </div>
+    </div>
+
+   
+</div>
+
+
+
+

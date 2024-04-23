@@ -11,7 +11,7 @@ public partial class Subject
 
     public int DepartmentId { get; set; }
 
-    public virtual Department Department { get; set; } = null!;
+    public virtual Department? Department { get; set; } 
 
     public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();
 }

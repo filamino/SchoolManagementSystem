@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@* <h1>Details</h1>
 
 <div>
     <h4>Teacher</h4>
@@ -63,4 +63,135 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.TeacherId">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
+
+
+   <div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Teachers Details</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Index">Teachers</a>
+                        </li>
+                        <li class="breadcrumb-item active">Teachers Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="about-info">
+                            <h4>About Me</h4>
+                            <div class="media mt-3">
+                                <img src="~/assets/img/user.jpg" class="mr-3" alt="..." />
+                                <div class="media-body">
+                                    <ul>
+                                        <li>
+                                            <span class="title-span">Full Name : </span>
+                                            <span class="info-span">@Model.FirstName  @Model.LastName</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Qualification : </span>
+                                            <span class="info-span">@Model.Qualification</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Mobile : </span>
+                                            <span class="info-span">@Model.MobileNumber</span>
+                                        </li>
+                                        <li>
+                                            <span class="title-span">Date of Birth : </span>
+                                            <span class="info-span">@Model.DateOfBirth</span>
+                                        </li>
+                                        
+                                        <li>
+                                            <span class="title-span">Email : </span>
+                                            <span class="info-span">
+                                                <a href="https://preschool.com/cdn-cgi/l/email-protection"
+                                                   class="__cf_email__"
+                                                   data-cfemail="a3c7c2cad0dae3c4cec2cacf8dc0ccce">[email&#160;protected]</a>
+                                            </span>
+                                        </li>
+                                        
+                                        <li>
+                                            <span class="title-span">DOB : </span>
+                                            <span class="info-span">@Model.DateOfBirth</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <p>
+                                        Hello I am Daisy Parks. Lorem Ipsum is simply dummy
+                                        text of the printing and typesetting industry, simply
+                                        dummy text of the printing and typesetting industry.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <h5>Permanent Address</h5>
+                                    <p>480, Estern Avenue, Courtage area, New York</p>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <h5>Present Address</h5>
+                                    <p>480, Estern Avenue, Courtage area, New York</p>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h5>Qualification</h5>
+                                    <p class="mt-3">
+                                        Secondary Schooling at xyz school of secondary
+                                        education, Mumbai.
+                                    </p>
+                                    <p>
+                                        Higher Secondary Schooling at xyz school of higher
+                                        secondary education, Mumbai.
+                                    </p>
+                                    <p>
+                                        Bachelor of Science at Abc College of Art and Science,
+                                        Chennai.
+                                    </p>
+                                    <p>
+                                        Master of Science at Cdm College of Engineering and
+                                        Technology, Pune.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h5>Experience</h5>
+                                    <p class="mt-3">1st Prise in Running Competition.</p>
+                                    <p>Lorem Ipsum is simply dummy text.</p>
+                                    <p>
+                                        Won overall star student in higher secondary
+                                        education.
+                                    </p>
+                                    <p>Lorem Ipsum is simply dummy text.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@Model?.TeacherId">Edit</a> |
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright © 2024 SchoolManagementSystem</p>
+    </footer>
+</div> 

@@ -4,6 +4,7 @@ using SchoolManagementSystem.Models;
 using SchoolManagementSystem.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SchoolManagementSystem.Data.Entities;
+using SchoolManagementSystem.Services;
 
 namespace SchoolManagementSystem
 {
@@ -15,13 +16,15 @@ namespace SchoolManagementSystem
 
             // Add services to the container.
             builder.Services.AddScoped<SmsdbContext>();
+            builder.Services.AddScoped<AccountService>();
             builder.Services.AddControllersWithViews();
-            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 
-            //{ options.LoginPath = "Account/Login";
-            //    options.LogoutPath = "Account/Logout";
-            //}
-            //);
+            {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+            }
+            );
             builder.Services.AddDbContext<SmsdbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
             var app = builder.Build();
 
@@ -43,7 +46,7 @@ namespace SchoolManagementSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
 
             app.Run();
         }

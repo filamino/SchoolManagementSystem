@@ -17,5 +17,5 @@ public partial class Profile
 
     public virtual Gender? Gender { get; set; }
 
-    public virtual Register User { get; set; } = null!;
+    public virtual Register? User { get; set; }
 }

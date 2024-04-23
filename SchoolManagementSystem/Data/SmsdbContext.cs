@@ -19,7 +19,7 @@ public partial class SmsdbContext : DbContext
 
     public virtual DbSet<Address> Addresses { get; set; }
 
-    public virtual DbSet<Class> Classes { get; set; }
+
 
     public virtual DbSet<Department> Departments { get; set; }
 
@@ -73,15 +73,6 @@ public partial class SmsdbContext : DbContext
                 .HasForeignKey(d => d.TeacherId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Address_Teacher");
-        });
-
-        modelBuilder.Entity<Class>(entity =>
-        {
-            entity.ToTable("Class");
-
-            entity.Property(e => e.Class1)
-                .HasMaxLength(50)
-                .HasColumnName("Class");
         });
 
         modelBuilder.Entity<Department>(entity =>
@@ -183,9 +174,9 @@ public partial class SmsdbContext : DbContext
 
             entity.ToTable("Register");
 
-            entity.Property(e => e.ComfirmPassword).HasMaxLength(50);
+            entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(50);
-            entity.Property(e => e.Name).HasMaxLength(50);
+            entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.Password).HasMaxLength(50);
         });
 
