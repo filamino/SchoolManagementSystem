@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SchoolManagementSystem.Data.Entities.Register
+
+@{
     Layout = null;
 }
 
@@ -7,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Preskool - Register</title>
+    <title> Register</title>
 
     <link rel="shortcut icon" href="~/assets/img/favicon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
@@ -34,17 +36,21 @@
 
                             <form method="post">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="FirstName" value="" placeholder="First Name">
+                                    <input asp-for="FirstName" class="form-control" type="text" name="FirstName" value="" placeholder="First Name">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="LastName" value="" placeholder="Last Name">
+                                    <input asp-for="LastName" class="form-control" type="text" name="LastName" value="" placeholder="Last Name">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="Email" value="" placeholder="Email">
+                                    <input asp-for="Email" class="form-control" type="text" name="Email" value="" placeholder="Email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="Password" value="" placeholder="password">
+                                    <input asp-for="Password" type="password" class="form-control" name="Password" value="" placeholder="password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                                 <div class="form-group mb-0">
                                     <button class="btn btn-primary btn-block" type="submit">Register</button>

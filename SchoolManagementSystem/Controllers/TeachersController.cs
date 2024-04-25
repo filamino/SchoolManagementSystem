@@ -149,7 +149,8 @@ namespace SchoolManagementSystem.Controllers
             }
 
             await _dbContext.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+			TempData["AlertMessage"] = "Record Deleted Successfully";
+			return RedirectToAction(nameof(Index));
         }
 
         private bool TeacherExists(int id)

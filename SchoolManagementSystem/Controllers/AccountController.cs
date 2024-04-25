@@ -77,6 +77,7 @@ namespace SchoolManagementSystem.Controllers
                     // error message
                     return View();
                 }
+                
                 Redirect ("/Account/Login");
             }
             
@@ -94,3 +95,4 @@ namespace SchoolManagementSystem.Controllers
 
     }
 }
+//TempData["AlertMessage"] = "New Account Registered Successfully";

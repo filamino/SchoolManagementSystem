@@ -23,6 +23,12 @@ namespace SchoolManagementSystem.Services
             return _dbContext.SaveChanges();
         }
 
+        public Register GetByEmail(string email)
+        {
+            return _dbContext.Registers.FirstOrDefault(u => u.Email == email);
+        }
+
+
         public static string CreatePasswordHash(string email, string password)
         {
            using(SHA256  sha256 = SHA256.Create())

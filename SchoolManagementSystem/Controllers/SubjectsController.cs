@@ -10,22 +10,23 @@ using SchoolManagementSystem.Data.Entities;
 
 namespace SchoolManagementSystem.Controllers
 {
-    public class DepartmentsController : Controller
+    public class SubjectsController : Controller
     {
         private readonly SmsdbContext _context;
 
-        public DepartmentsController(SmsdbContext context)
+        public SubjectsController(SmsdbContext context)
         {
             _context = context;
         }
 
-        // GET: Departments
+        // GET: Subjects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departments.ToListAsync());
+            var smsdbContext = _context.Subjects.Include(s => s.Department);
+            return View(await smsdbContext.ToListAsync());
         }
 
-        // GET: Departments/Details/5
+        // GET: Subjects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,40 +34,42 @@ namespace SchoolManagementSystem.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Departments
-                .FirstOrDefaultAsync(m => m.DepartmentId == id);
-            if (department == null)
+            var subject = await _context.Subjects
+                .Include(s => s.Department)
+                .FirstOrDefaultAsync(m => m.SubjectId == id);
+            if (subject == null)
             {
                 return NotFound();
             }
 
-            return View(department);
+            return View(subject);
         }
 
-        // GET: Departments/Create
+        // GET: Subjects/Create
         public IActionResult Create()
         {
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId");
             return View();
         }
 
-        // POST: Departments/Create
+        // POST: Subjects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DepartmentId,Department1,HeadOfDepartment,DepartmentStartDate,NumberOfStudent")] Department department)
+        public async Task<IActionResult> Create([Bind("SubjectId,SubjectName,DepartmentId")] Subject subject)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(department);
+                _context.Add(subject);
                 await _context.SaveChangesAsync();
-				TempData["AlertMessage"] = "New Record Created Successfully";
-				return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
-            return View(department);
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId", subject.DepartmentId);
+            return View(subject);
         }
 
-        // GET: Departments/Edit/5
+        // GET: Subjects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +77,23 @@ namespace SchoolManagementSystem.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Departments.FindAsync(id);
-            if (department == null)
+            var subject = await _context.Subjects.FindAsync(id);
+            if (subject == null)
             {
                 return NotFound();
             }
-            return View(department);
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId", subject.DepartmentId);
+            return View(subject);
         }
 
-        // POST: Departments/Edit/5
+        // POST: Subjects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DepartmentId,Department1,HeadOfDepartment,DepartmentStartDate,NumberOfStudent")] Department department)
+        public async Task<IActionResult> Edit(int id, [Bind("SubjectId,SubjectName,DepartmentId")] Subject subject)
         {
-            if (id != department.DepartmentId)
+            if (id != subject.SubjectId)
             {
                 return NotFound();
             }
@@ -98,12 +102,12 @@ namespace SchoolManagementSystem.Controllers
             {
                 try
                 {
-                    _context.Update(department);
+                    _context.Update(subject);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DepartmentExists(department.DepartmentId))
+                    if (!SubjectExists(subject.SubjectId))
                     {
                         return NotFound();
                     }
@@ -112,13 +116,13 @@ namespace SchoolManagementSystem.Controllers
                         throw;
                     }
                 }
-				TempData["AlertMessage"] = "Record Updated Successfully";
-				return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
-            return View(department);
+            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId", subject.DepartmentId);
+            return View(subject);
         }
 
-        // GET: Departments/Delete/5
+        // GET: Subjects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,35 +130,35 @@ namespace SchoolManagementSystem.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Departments
-                .FirstOrDefaultAsync(m => m.DepartmentId == id);
-            if (department == null)
+            var subject = await _context.Subjects
+                .Include(s => s.Department)
+                .FirstOrDefaultAsync(m => m.SubjectId == id);
+            if (subject == null)
             {
                 return NotFound();
             }
 
-            return View(department);
+            return View(subject);
         }
 
-        // POST: Departments/Delete/5
+        // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var department = await _context.Departments.FindAsync(id);
-            if (department != null)
+            var subject = await _context.Subjects.FindAsync(id);
+            if (subject != null)
             {
-                _context.Departments.Remove(department);
+                _context.Subjects.Remove(subject);
             }
 
             await _context.SaveChangesAsync();
-			TempData["AlertMessage"] = "Record Deleted Successfully";
-			return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
-        private bool DepartmentExists(int id)
+        private bool SubjectExists(int id)
         {
-            return _context.Departments.Any(e => e.DepartmentId == id);
+            return _context.Subjects.Any(e => e.SubjectId == id);
         }
     }
 }

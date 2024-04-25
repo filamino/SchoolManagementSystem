@@ -25,6 +25,11 @@ namespace SchoolManagementSystem.Controllers
             return View(await _context.Students.ToListAsync());
         }
 
+        public async Task<IActionResult> GetTop()
+        {
+            return View(await _context.Students.Take(5).ToListAsync());
+        }
+
         // GET: Student/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -60,7 +65,8 @@ namespace SchoolManagementSystem.Controllers
             {
                 _context.Add(student);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+				TempData["AlertMessage"] = "New Record Created Successfully";
+				return RedirectToAction(nameof(Index));
             }
             return View(student);
         }
@@ -111,7 +117,8 @@ namespace SchoolManagementSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+				TempData["AlertMessage"] = "Record Updated Successfully";
+				return RedirectToAction(nameof(Index));
             }
             return View(student);
         }
@@ -146,12 +153,19 @@ namespace SchoolManagementSystem.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+			TempData["AlertMessage"] = "Record Deleted Successfully";
+			return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(int id)
         {
             return _context.Students.Any(e => e.StudentId == id);
+        }
+
+        public IActionResult UploadImage(IFormFile file)
+        {
+            
+            return View(file);
         }
     }
 }
