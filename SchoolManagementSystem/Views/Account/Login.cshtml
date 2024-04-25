@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SchoolManagementSystem.Data.Entities.Register
+
+@{
 	Layout = null;
 }
 
@@ -17,6 +19,14 @@
 </head>
 <body>
 
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["AlertMessage"]
+            <button type="button" class="close" data-dismiss="alert"> <span>&times;</span></button>
+        </div>
+    }
+
 <div class="main-wrapper login-body">
     <div class="login-wrapper">
         <div class="container">
@@ -30,11 +40,13 @@
                         <p class="account-subtitle">Access to our dashboard</p>
                         <form method="post">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="email" value="" placeholder="Email">
+                                    <input asp-for="Email" class="form-control" type="text" name="email" value="" placeholder="Email">                                 
+                                    <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" name="password" value="" placeholder="password">
+                                    <input asp-for="Password" type="password" class="form-control" name="password" value="" placeholder="password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 

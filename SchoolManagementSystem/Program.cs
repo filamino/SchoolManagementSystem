@@ -17,6 +17,8 @@ namespace SchoolManagementSystem
             // Add services to the container.
             builder.Services.AddScoped<SmsdbContext>();
             builder.Services.AddScoped<AccountService>();
+            builder.Services.AddScoped<StudentService>();
+            builder.Services.AddScoped<SearchService>();
             builder.Services.AddControllersWithViews();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 
@@ -25,7 +27,12 @@ namespace SchoolManagementSystem
                 options.LogoutPath = "/Account/Logout";
             }
             );
-            builder.Services.AddDbContext<SmsdbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+            builder.Services.AddDbContext<SmsdbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"))
+            .LogTo(Console.WriteLine).
+            EnableSensitiveDataLogging().
+            UseLazyLoadingProxies());
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
